@@ -18,21 +18,8 @@ const InvoiceApp=()=>{
 
   const [counter, setCounter]= useState(4);
 
-  //const onProductChange = (event)=>{
-    //console.log(event.target.value);
-      //setProductValue(event.target.value)
-  //}
-  //const onPriceChange =(event)=>{
-    //console.log(event.target.value);
-    //setPriceValue(event.target.value);
-  //}
 
-  //const onQuantity=(event)=>{
-    //console.log(event.target.value);
-    //setQuantityValue(event.target.value);
-  //}
   //TODO:2DA FORMA DESECTRUCTURADO
-
   const onProductChange = ({target})=>{
     console.log(target.value);
       setProductValue(target.value)
@@ -42,7 +29,7 @@ const InvoiceApp=()=>{
     setPriceValue(target.value);
   }
 
-  const onQuantity=({target})=>{
+  const onQuantityChange=({target})=>{
     console.log(target.value);
     setQuantityValue(target.value);
   }
@@ -126,7 +113,7 @@ const InvoiceApp=()=>{
                   name="quantity"
                   value={quantityValue}
                   placeholder='Cantidad'
-                  onChange={onQuantity}
+                  onChange={onQuantityChange}
                 />
                 <button
                   type='submit'
