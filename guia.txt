@@ -1,5 +1,5 @@
-https://www.udemy.com/course/react-spring-creando-webapp-full-stack/learn/lecture/35602926#content
+https://www.udemy.com/course/react-spring-creando-webapp-full-stack/learn/lecture/35633322#content
 
 SESSION 5 : APLICATION FACTURACION
-64.Convertir string a number en inputs o campos numericos
-0:00 / 10:00
+68. Form un solo state para todos los input
+8:34 / 16:45
