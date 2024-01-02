@@ -67,6 +67,10 @@ const InvoiceApp=()=>{
     setCounter(counter+1);
   }
 
+  const handlerDeleteItem = (id)=>{
+    setItems(items.filter( item=> item.id != id ))
+  }
+
   const onActiveForm = () =>{
     setActiveForm(!activeForm);
   }
@@ -93,7 +97,10 @@ const InvoiceApp=()=>{
             </div>
             <div className="row">
               {/*Datos del Empresa*/}
-              <ListItemView title="Productos de la Factura" items={items}/>
+              <ListItemView title="Productos de la Factura"
+                items={items}
+                handlerDeleteItem={ id => handlerDeleteItem(id) }
+              />
               <TotalView total={total}/>
 
               {/* Formulario*/}
