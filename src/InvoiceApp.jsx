@@ -29,6 +29,8 @@ const invoiceInitial={
 
 const InvoiceApp=()=>{
 
+  const [ activeForm, setActiveForm ] = useState(false)
+
   const [total, setTotal]=useState(0);
 
   const [invoice, setInvoice] = useState(invoiceInitial);
@@ -65,6 +67,10 @@ const InvoiceApp=()=>{
     setCounter(counter+1);
   }
 
+  const onActiveForm = () =>{
+    setActiveForm(!activeForm);
+  }
+
   return(
     <>
       <div className='container'>
@@ -91,7 +97,17 @@ const InvoiceApp=()=>{
               <TotalView total={total}/>
 
               {/* Formulario*/}
-              <FormItemView handler={ handlerAddItems } />
+              <button
+                className='btn btn-secondary'
+                onClick={ onActiveForm }
+              >
+                { !activeForm ? 'Agregar Item': 'Ocultar Form' }
+              </button>
+              {/* si esta en true muestrame caso contrario no me muestres nada de html*/}
+              {/* forma ternaria simplificada */}
+              { !activeForm || <FormItemView handler={handlerAddItems} />}
+              {/* { !activeForm ? '' : <FormItemView handler={handlerAddItems} />} */}
+
             </div>
           </div>
         </div>
