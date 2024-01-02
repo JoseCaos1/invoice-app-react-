@@ -5,6 +5,7 @@ import {CompanyView} from './components/CompanyView';
 import {InvoiceView} from './components/InvoiceView';
 import {ListItemView} from './components/ListItemView';
 import {TotalView} from './components/TotalView';
+import FormItemView from './components/FormItemsView';
 
 const invoiceInitial={
   id: 0,
@@ -34,17 +35,10 @@ const InvoiceApp=()=>{
 
   const [items, setItems]=useState([]);
 
-  const [formItemsState, setFormItemsState]= useState({
-    product: '',
-    price:'',
-    quantity:'',
-  });
-
   const [counter, setCounter]= useState(4);
 
   const {id, name, client, company} = invoice;
 
-  const { product, price, quantity } =formItemsState;
 
   useEffect(()=>{
     const data = getInvoice();//traer la data de una api
@@ -53,48 +47,13 @@ const InvoiceApp=()=>{
     setItems(data.items);
   },[])
 
-  useEffect(()=>{
-    //console.log('el precio cambio!');
-  },[price])
-
-  useEffect(()=>{
-    //console.log('el formItemsState cambio');
-  },[formItemsState])
 
   useEffect(()=>{
     setTotal(calculateTotal(items))
     console.log('el items cambio');
   },[items])
 
-
-  //TODO: FORM STATE PARA TODOS LOS INPUT
-  const onInputChange = ({target :{ name, value }})=>{
-    //console.log(name);
-    //console.log(value);
-
-    setFormItemsState({
-      ...formItemsState,
-      [ name ]: value
-    })
-  }
-
-  const onInvoiceItemsSubmit = (event)=>{
-    event.preventDefault();
-
-    if(product.trim().length <=1) return;
-    if(price.trim().length <=1) return;
-    if(isNaN(price.trim())) {
-      alert("Error el precio no es un numero")
-      return;
-    };
-    if(quantity.trim().length <1) {
-      alert("La cantidad tiene q ser mayor a cero")
-      return;
-    };
-    if(isNaN(quantity.trim())) {
-      alert("Error la cantidad no es un numero")
-      return;
-    };
+  const handlerAddItems = ({product, price, quantity})=>{
 
     setItems([...items, {
       id:counter,
@@ -103,11 +62,6 @@ const InvoiceApp=()=>{
       quantity:parseInt(quantity.trim(),10)
     }]);
 
-    setFormItemsState({
-        product: '',
-        price:'',
-        quantity:'',
-      });
     setCounter(counter+1);
   }
 
@@ -137,39 +91,7 @@ const InvoiceApp=()=>{
               <TotalView total={total}/>
 
               {/* Formulario*/}
-              <form className='w-50' onSubmit={onInvoiceItemsSubmit}>
-                <input
-                  className="form-control m-2"
-                  type="text"
-                  name="product"
-                  value={product}
-                  placeholder='Producto'
-                  onChange={onInputChange}
-                />
-                <input
-                  className="form-control m-2"
-                  type="number"
-                  name="price"
-                  value={price}
-                  placeholder='Precio'
-                  onChange={(event)=> onInputChange(event)}
-                />
-                <input
-                  className="form-control m-2"
-                  type="number"
-                  name="quantity"
-                  value={quantity}
-                  placeholder='Cantidad'
-                  onChange={onInputChange}
-                />
-                <button
-                  type='submit'
-                  className='btn btn-primary m-3'
-                >
-                  Nuevo Item
-                </button>
-              </form>
-
+              <FormItemView handler={ handlerAddItems } />
             </div>
           </div>
         </div>
