@@ -11,9 +11,14 @@ export const getInvoice=()=>{
   //return {...invoice, total:total};
   // lo mismo pero resumido
 
-  //2da forma es la programacion funcional
-  const total = invoice.items
-    .map(item => item.price * item.quantity)
-    .reduce((accumulator, currentValue)=>accumulator + currentValue, 0);
+  const total = calculateTotal(invoice.items)
   return {...invoice, total};
+}
+
+//Opcional poner items =[]
+//solo para decirle q es de tipo arreglo
+export const calculateTotal= (items = [])=>{
+  return items
+    .map(item=> item.price * item.quantity)
+    .reduce((accumulator, currentValue)=> accumulator + currentValue, 0);
 }

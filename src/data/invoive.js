@@ -26,12 +26,12 @@ export const invoice={
         id:2,
         product:'Corsair Keyboard Mecanico',
         price:150,
-        quantity:1
+        quantity:2
       },
       {
         id:3,
         product:'Monitor Asus',
-        price:356,
+        price:350,
         quantity:1
       },
     ]

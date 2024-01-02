@@ -1,5 +1,5 @@
-https://www.udemy.com/course/react-spring-creando-webapp-full-stack/learn/lecture/35633322#content
+https://www.udemy.com/course/react-spring-creando-webapp-full-stack/learn/lecture/35648996#content
 
 SESSION 5 : APLICATION FACTURACION
-68. Form un solo state para todos los input
-8:34 / 16:45
+70. Profundizar hook useState
+0:00 / 0:00

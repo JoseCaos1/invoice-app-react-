@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { getInvoice } from './services/getInvoice';
+import { getInvoice, calculateTotal } from './services/getInvoice';
 import { ClientView } from './components/ClientView';
 import {CompanyView} from './components/CompanyView';
 import {InvoiceView} from './components/InvoiceView';
@@ -28,9 +28,23 @@ const invoiceInitial={
 
 const InvoiceApp=()=>{
 
+  const [total, setTotal]=useState(0);
+
   const [invoice, setInvoice] = useState(invoiceInitial);
 
   const [items, setItems]=useState([]);
+
+  const [formItemsState, setFormItemsState]= useState({
+    product: '',
+    price:'',
+    quantity:'',
+  });
+
+  const [counter, setCounter]= useState(4);
+
+  const {id, name, client, company} = invoice;
+
+  const { product, price, quantity } =formItemsState;
 
   useEffect(()=>{
     const data = getInvoice();//traer la data de una api
@@ -39,18 +53,18 @@ const InvoiceApp=()=>{
     setItems(data.items);
   },[])
 
-  const {id, name, client, company, items:itemsInitial, total} = invoice;
+  useEffect(()=>{
+    //console.log('el precio cambio!');
+  },[price])
 
-  const [formItemsState, setFormItemsState]= useState({
-    product: '',
-    price:'',
-    quantity:'',
-  });
+  useEffect(()=>{
+    //console.log('el formItemsState cambio');
+  },[formItemsState])
 
-  const { product, price, quantity } =formItemsState;
-
-
-  const [counter, setCounter]= useState(4);
+  useEffect(()=>{
+    setTotal(calculateTotal(items))
+    console.log('el items cambio');
+  },[items])
 
 
   //TODO: FORM STATE PARA TODOS LOS INPUT
